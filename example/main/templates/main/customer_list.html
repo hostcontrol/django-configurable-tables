@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load table %}
+
+{% block body %}
+<form class="form form-inline" method="post">
+    {% csrf_token %}
+    {{ table_configuration_form }}
+    <button>Update</button>
+</form>
+{% render_table table %}
+{% endblock %}
