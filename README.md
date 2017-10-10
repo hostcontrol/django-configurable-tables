@@ -4,6 +4,8 @@ Status: **Work In Progress**
 
 Configurable (filterable, sortable, paginatable) HTML table support in Django
 
+![Screenshot](screenshot.png)
+
 ## Run the example application
 
 `docker build -t django-tables .`

@@ -55,13 +55,6 @@ class Column(object):
             return context.get(name)
 
 
-class ActionsColumn(Column):
-
-    def __init__(self, **kwargs):
-
-        super(ActionsColumn, self).__init__(is_always_visible=True, label='Actions', **kwargs)
-
-
 class DateColumn(Column):
 
     default_template = 'django_tables/columns/date.html'

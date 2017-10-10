@@ -17,6 +17,10 @@ class Migration(migrations.Migration):
                 ('first_name', models.CharField(max_length=255)),
                 ('last_name', models.CharField(max_length=255)),
                 ('email_address', models.EmailField(max_length=254)),
+                ('has_paid', models.BooleanField()),
+                ('registered_at', models.DateTimeField())
             ],
         ),
     ]
+
+
