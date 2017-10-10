@@ -3,10 +3,23 @@
 {% load table %}
 
 {% block body %}
-<form class="form form-inline" method="post">
-    {% csrf_token %}
-    {{ table_configuration_form }}
-    <button>Update</button>
-</form>
-{% render_table table %}
+<div class="row">
+    <form class="form form-inline" method="post">
+        {% csrf_token %}
+        {{ table_configuration_form.as_p }}
+        <p>
+            <button>Update</button>
+        </p>
+    </form>
+</div>
+
+<div class="row">
+    {% render_table table %}
+</div>
+
+<div class="row">
+    {% include 'includes/paginator.html' %}
+</div>
+
+
 {% endblock %}

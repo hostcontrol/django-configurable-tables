@@ -96,7 +96,11 @@ class ConfigurableTableView(TableMixin, FilterMixin, OrderByMixin, PaginationMix
                 if 'page' in query_dict:
                     del query_dict['page']
 
-            table_configuration.update(**form.cleaned_data)
+            for field, value in form.cleaned_data.items():
+                setattr(table_configuration, field, value)
+
+            keys = form.cleaned_data.keys()
+            table_configuration.save(update_fields=keys)
 
         # Rebuild the URL (similar to request.get_full_path() but use the QueryDict object)
         redirect_to = '%s%s' % (request.path, ('?' + query_dict.urlencode()) if query_dict else '')

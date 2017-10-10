@@ -1,0 +1,21 @@
+{% if paginator.num_pages > 1 %}
+<ul class="pagination unstyled">
+    {% if page_obj.leading_range %}
+        {% for page_num in page_obj.leading_range %}
+            <li{% if page_num == page_obj.number %} class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endfor %}
+        <li>...</li>
+    {% endif %}
+
+    {% for page_num in page_obj.main_range %}
+        <li{% if page_num == page_obj.number %} class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+    {% endfor %}
+
+    {% if page_obj.trailing_range %}
+        <li>...</li>
+        {% for page_num in page_obj.trailing_range %}
+            <li{% if page_num == page_obj.number %} class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endfor %}
+    {% endif %}
+</ul>
+{% endif %}
