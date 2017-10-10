@@ -3,12 +3,11 @@ from __future__ import unicode_literals
 import copy
 
 from django.template import TemplateDoesNotExist
-from django.template.loader import find_template, render_to_string
+from django.template.loader import get_template, render_to_string
 from django.utils.translation import gettext_lazy as _
-
 import six
 
-from django_tables.column import Column
+from .column import Column
 
 
 DEFAULT_NAMES = ('empty_message', 'template_directory', 'default_columns', 'context_name')
@@ -186,7 +185,7 @@ class Cell(object):
 
         try:
             # Check if the template exists
-            find_template(template_name)
+            get_template(template_name)
 
         except TemplateDoesNotExist:
             return self.column.default_template
@@ -209,3 +208,14 @@ class Cell(object):
         template_name = self.get_template_name()
 
         return render_to_string(template_name, context_data)
+
+
+class DetailTableRow(object):
+
+    def __init__(self, table, context):
+        self.table = table
+        self.context = context
+
+    def __iter__(self):
+        for column in [column[1] for column in self.table._meta.columns if column[0] != 'actions']:
+            yield Cell(self.context, column, self.table)

@@ -86,23 +86,14 @@ class TableMixin(object):
         Returns the initialized table configuration model for this table.
         """
 
-        if self.request.user.is_authenticated():
-            table_configuration, created = TableConfiguration.objects.get_or_create(
-                user=self.request.user,
-                name=self.get_table_name_for_table_class(table_class=table_class),
-                table_class=table_class.__name__,
-                defaults={
-                    'columns': self.get_default_columns(table_class=table_class)
-                }
-            )
-        else:
-            created = False
-            table_configuration = TableConfiguration(
-                name=self.get_table_name_for_table_class(table_class=table_class),
-                table_class=table_class.__name__,
-                columns=self.get_default_columns(table_class=table_class),
-                limit=self.paginate_by if hasattr(self, 'paginate_by') else 20
-            )
+        table_configuration, created = TableConfiguration.objects.get_or_create(
+            user=self.request.user,
+            name=self.get_table_name_for_table_class(table_class=table_class),
+            table_class=table_class.__name__,
+            defaults={
+                'columns': self.get_default_columns(table_class=table_class)
+            }
+        )
 
         return table_configuration, created
 

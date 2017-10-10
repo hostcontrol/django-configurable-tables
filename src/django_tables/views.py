@@ -22,16 +22,14 @@ class ConfigurableTableView(TableMixin, FilterMixin, OrderByMixin, PaginationMix
         """
         Returns the initialized table configuration model for this table.
         """
-
         table_configuration, created = super(ConfigurableTableView, self).get_table_configuration(
             table_class=table_class
         )
 
         if created:
-            table_configuration.update(
-                limit=super(ConfigurableTableView, self).get_paginate_by(self.get_queryset()),
-                order_by=super(ConfigurableTableView, self).get_default_order_by()
-            )
+            table_configuration.limit = super(ConfigurableTableView, self).get_paginate_by(self.get_queryset())
+            table_configuration.order_by = super(ConfigurableTableView, self).get_default_order_by()
+            table_configuration.save(update_fields=['limit', 'order_by'])
 
         return table_configuration
 

@@ -30,8 +30,9 @@ setup(
         'pytest-runner'
     ],
     install_requires=[
-        'Django>=1.7,<1.8',
-        'jsonfield'
+        'Django>=1.8,<1.9',
+        'jsonfield',
+        'six>=1.10.0,<1.11'
     ],
     tests_require=[
         'pytest-django',

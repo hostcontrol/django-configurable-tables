@@ -17,6 +17,7 @@ class TableConfiguration(models.Model):
     class Meta(object):
         db_table = 'table_configuration'
         unique_together = ('user', 'name')
+        app_label = 'django_tables'
 
     def __unicode__(self):
         return 'Configuration for {} table'.format(self.name)
